@@ -1,7 +1,15 @@
 {
     "env" : {
         "development" : {
-            "presets": ["es2015", "stage-0"]
+            "presets": ["es2015", "stage-0"],
+            "plugins": [
+                [
+                    "transform-react-jsx",
+                    {
+                        "pragma": "h"
+                    }
+                ]
+            ]
         },
         "build" : {
             "presets": ["es2015", "stage-0", {
@@ -11,6 +19,14 @@
             }],
             "ignore": [
                 "**/_tests_/*.js"
+            ],
+            "plugins": [
+                [
+                    "transform-react-jsx",
+                    {
+                        "pragma": "h"
+                    }
+                ]
             ]
         }
     }

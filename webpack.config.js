@@ -1,3 +1,6 @@
+/* eslint-disable */
+'use strict';
+
 const webpack = require('webpack')
 
 module.exports = {
@@ -16,6 +19,7 @@ module.exports = {
                 loader: 'babel-loader',
                 exclude: [
                     '/dist/',
+                    '/demo/',
                     '/node_modules/',
                     '/test/',
                 ],
