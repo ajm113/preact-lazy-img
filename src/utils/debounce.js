@@ -1,4 +1,4 @@
-export default (func, wait, immediate=false) => {
+export function debounce(func, wait, immediate=false) {
     let timeout = 0;
 
     return () => {
