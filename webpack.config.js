@@ -10,7 +10,7 @@ module.exports = {
         path: __dirname + '/dist/umd/',
         filename: 'preact-lazy-img.js',
         publicPath: '/build/',
-        library: 'PreactLazyImg',
+        library: 'preactLazyImg',
         libraryTarget: 'umd'
     },
     module: {
