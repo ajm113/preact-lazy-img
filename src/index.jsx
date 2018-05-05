@@ -1,2 +1,2 @@
 // Nothing yet, boss.
-export LazyImg from './components/LazyImg.jsx';
+export LazyImg from './components/LazyImg';
