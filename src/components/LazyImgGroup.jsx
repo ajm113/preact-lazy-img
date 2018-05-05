@@ -2,13 +2,11 @@ import Preact from 'preact';
 
 export default class LazyImgGroup extends Preact.Component {
     constructor(props) {
-        this.state = {
-
-        }
+        super(props);
+        this.state = {};
     }
 
     render() {
-        const {}
     }
 
     static defaultProps = {
