@@ -53,6 +53,7 @@
     "mocha": "^5.1.1",
     "mocha-jsdom": "^1.1.0",
     "preact": "^8",
+    "preact-jsx-chai": "^2.2.1",
     "rimraf": "^2.6.2",
     "webpack": "^3.5.6"
   }
