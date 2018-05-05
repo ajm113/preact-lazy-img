@@ -1,6 +1,4 @@
 import Preact from 'preact';
-import PropTypes from 'prop-types';
-
 
 export default class LazyImgGroup extends Preact.Component {
     constructor(props) {
