@@ -10,7 +10,11 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _preact = require('preact');
 
-var _preact2 = _interopRequireDefault(_preact);
+var _LazyWrapper = require('./LazyWrapper');
+
+var _LazyWrapper2 = _interopRequireDefault(_LazyWrapper);
+
+var _debounce = require('../utils/debounce');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,19 +28,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var PLACEHOLDER_DIV_CLASSNAME = 'lazyload-placeholder';
 
-var LazyImg = function (_Preact$Component) {
-    _inherits(LazyImg, _Preact$Component);
+var LazyImg = function (_Component) {
+    _inherits(LazyImg, _Component);
 
     function LazyImg(props) {
         _classCallCheck(this, LazyImg);
 
         var _this = _possibleConstructorReturn(this, (LazyImg.__proto__ || Object.getPrototypeOf(LazyImg)).call(this, props));
 
+        _this.onWindowScaleEvent = function (e) {
+            (0, _debounce.debounce)(function () {
+                _this.setState({
+                    visible: _this.isInViewport()
+                });
+            }, 50)();
+        };
+
         _this.shouldComponentUpdate = function () {
             return _this.state.visible;
         };
 
-        _this.state = {};
+        _this.state = {
+            visible: false
+        };
+
+        _this.el = null;
         return _this;
     }
 
@@ -52,29 +68,40 @@ var LazyImg = function (_Preact$Component) {
 
             var props = _objectWithoutProperties(_ref, []);
 
-            return this.visible ? h('img', _extends({ ref: function ref(el) {
-                    return _this2.el = el;
-                } }, props)) : props.placeholder ? props.placeholder : h('div', { style: { height: props.height }, className: PLACEHOLDER_DIV_CLASSNAME });
+            var placeholder = props.placeholder ? props.placeholder : (0, _preact.h)('div', { style: { height: props.height }, className: PLACEHOLDER_DIV_CLASSNAME });
+
+            return (0, _preact.h)(
+                _LazyWrapper2.default,
+                { onWindowScroll: this.onWindowScaleEvent, onWindowResize: this.onWindowScaleEvent },
+                (0, _preact.h)('img', _extends({}, props, { ref: function ref(el) {
+                        return _this2.el = el;
+                    } }))
+            );
         }
     }, {
-        key: 'checkIfInViewport',
-        value: function checkIfInViewport() {
-
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            this.setState({
+                visible: this.isInViewport()
+            });
+        }
+    }, {
+        key: 'isInViewport',
+        value: function isInViewport() {
             if (!this.el) {
                 return false;
             }
 
             var top = this.el.getBoundingClientRect().top;
-            return top + this.prop.cushion >= 0 && top - this.prop.cushion <= window.innerHeight;
+            return top + this.props.cushion >= 0 && top - this.props.cushion <= window.innerHeight;
         }
     }]);
 
     return LazyImg;
-}(_preact2.default.Component);
+}(_preact.Component);
 
 LazyImg.defaultProps = {
     cushion: 0,
-    visible: true,
     placeholder: '',
     unmountIfInvisible: true,
     placeholderIfInvisible: true

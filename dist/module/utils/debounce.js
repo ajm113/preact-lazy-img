@@ -3,15 +3,17 @@
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var _arguments = arguments;
+exports.debounce = debounce;
+function debounce(func, wait) {
+    var _this = this,
+        _arguments = arguments;
 
-exports.default = function (func, wait) {
     var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     var timeout = 0;
 
     return function () {
-        var context = undefined,
+        var context = _this,
             args = _arguments;
         var later = function later() {
             timeout = 0;
@@ -26,4 +28,4 @@ exports.default = function (func, wait) {
 
         if (callNow) func.apply(context, args);
     };
-};
+}
