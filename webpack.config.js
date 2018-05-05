@@ -8,9 +8,9 @@ module.exports = {
     entry: './dist/module/index.js',
     output: {
         path: __dirname + '/dist/umd/',
-        filename: 'react-lazy.js',
+        filename: 'preact-lazy-img.js',
         publicPath: '/build/',
-        library: 'ReactLazy',
+        library: 'PreactLazyImg',
         libraryTarget: 'umd'
     },
     module: {
@@ -45,15 +45,5 @@ module.exports = {
             sourceMap: true
         }),
         new webpack.optimize.ModuleConcatenationPlugin(),
-    ],
-    externals: [
-        {
-            'prop-types': {
-                root: 'PropTypes',
-                commonjs2: 'prop-types',
-                commonjs: 'prop-types',
-                amd: 'prop-types'
-            }
-        }
-    ],
+    ]
 }
