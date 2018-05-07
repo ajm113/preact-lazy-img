@@ -35,8 +35,12 @@ var LazyWrapper = function (_Component) {
         }
 
         return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = LazyWrapper.__proto__ || Object.getPrototypeOf(LazyWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.update = function (e) {
-            if (_this.props.onWindowScroll) (0, _debounce.debounce)(_this.props.onWindowScroll, 50)(e);
-            if (_this.props.onWindowResize) (0, _debounce.debounce)(_this.props.onWindowResize, 50)(e);
+            switch (e.type) {
+                case 'scroll':
+                    if (_this.props.onWindowScroll) return (0, _debounce.debounce)(_this.props.onWindowScroll, 50)(e);
+                case 'resize':
+                    if (_this.props.onWindowResize) return (0, _debounce.debounce)(_this.props.onWindowResize, 50)(e);
+            }
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 

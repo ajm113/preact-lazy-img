@@ -14,6 +14,7 @@ export default class LazyImg extends Component {
     }
 
     onScrollOrResize = e => {
+        console.log('wow');
         this.setState({
            visible: this.isInViewport()
         });

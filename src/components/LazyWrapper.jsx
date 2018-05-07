@@ -6,10 +6,14 @@ const OPTIONS = {passive: true};
 export default class LazyWrapper extends Component {
 
     update = e => {
-        if(this.props.onWindowScroll)
-            debounce(this.props.onWindowScroll, 50)(e);
-        if(this.props.onWindowResize)
-            debounce(this.props.onWindowResize, 50)(e);
+        switch(e.type) {
+            case 'scroll':
+                if(this.props.onWindowScroll)
+                   return debounce(this.props.onWindowScroll, 50)(e);
+            case 'resize':
+                if(this.props.onWindowResize)
+                   return debounce(this.props.onWindowResize, 50)(e);
+        }
     }
 
     render({children: [child]}) {

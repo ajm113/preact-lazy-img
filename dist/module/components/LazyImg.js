@@ -35,9 +35,10 @@ var LazyImg = function (_Component) {
         var _this = _possibleConstructorReturn(this, (LazyImg.__proto__ || Object.getPrototypeOf(LazyImg)).call(this, props));
 
         _this.onScrollOrResize = function (e) {
-            console.log(_this.setState({
+            console.log('wow');
+            _this.setState({
                 visible: _this.isInViewport()
-            }));
+            });
         };
 
         _this.state = {
@@ -79,9 +80,7 @@ var LazyImg = function (_Component) {
     }, {
         key: 'isInViewport',
         value: function isInViewport() {
-            if (!this.el) {
-                return false;
-            }
+            if (!this.el) return false;
 
             var top = this.el.getBoundingClientRect().top;
             return top + this.props.cushion >= 0 && top - this.props.cushion <= window.innerHeight;
