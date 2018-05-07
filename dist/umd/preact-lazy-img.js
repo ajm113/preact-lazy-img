@@ -94,7 +94,7 @@ var a=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=argum
 for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},c=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n]
 o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),s=n(0),p=n(1),f=function(e){return e&&e.__esModule?e:{default:e}}(p),d=function(e){function t(e){r(this,t)
 var n=i(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))
-return n.onScrollOrResize=function(e){console.log("wow"),n.setState({visible:n.isInViewport()})},n.state={visible:!1},n.el=null,n}return l(t,e),c(t,[{key:"render",value:function(e,t){var n=this,r=t.visible,i=o(e,[]),l=i.placeholder?i.placeholder:(0,s.h)("div",{ref:function(e){return n.el=e.base},style:{height:i.height},className:"lazyload-placeholder"})
+return n.onScrollOrResize=function(e){n.setState({visible:n.isInViewport()})},n.state={visible:!1},n.el=null,n}return l(t,e),c(t,[{key:"render",value:function(e,t){var n=this,r=t.visible,i=o(e,[]),l=i.placeholder?i.placeholder:(0,s.h)("div",{ref:function(e){return n.el=e.base},style:{height:i.height},className:"lazyload-placeholder"})
 return(0,s.h)(f.default,{onWindowScroll:this.onScrollOrResize,onWindowResize:this.onScrollOrResize},r?(0,s.h)("img",a({},i,{ref:function(e){return n.el=e.base}})):l)}},{key:"componentDidMount",value:function(){this.setState({visible:this.isInViewport()})}},{key:"isInViewport",value:function(){if(!this.el)return!1
 var e=this.el.getBoundingClientRect().top
 return e+this.props.cushion>=0&&e-this.props.cushion<=window.innerHeight}}]),t}(s.Component)
