@@ -1,35 +1,32 @@
 import {h, Component} from 'preact';
+import { debounce } from '../utils/debounce';
+
+const OPTIONS = {passive: true};
 
 export default class LazyWrapper extends Component {
 
-    handleScroll = (e) => {
+    update = e => {
         if(this.props.onWindowScroll)
-            this.props.onWindowScroll(e);
-    }
-
-    handleResize = (e) => {
+            debounce(this.props.onWindowScroll, 50)(e);
         if(this.props.onWindowResize)
-            this.props.onWindowResize(e);
+            debounce(this.props.onWindowResize, 50)(e);
     }
 
-    render({children, ...props}) {
-        const className = 'preact-lazy-img-wrapper'
-        + (props.className ? ' ' + props.className: '');
-
-        return (<div {...props} className={className}>{children}</div>);
+    render({children: [child]}) {
+        return typeof child==='function' ? child() : child;
     }
 
     componentDidMount() {
         if(this.props.onWindowScroll)
-            window.addEventListener('scroll', this.handleScroll);
+            addEventListener('scroll', this.update, OPTIONS);
         if(this.props.onWindowResize)
-            window.addEventListener('resize', this.handleResize);
+            addEventListener('resize', this.update, OPTIONS);
     }
 
     componentWillUnmount() {
         if(this.props.onWindowScroll)
-            window.removeEventListener('scroll', this.handleScroll);
+            removeEventListener('scroll', this.update, OPTIONS);
         if(this.props.onWindowResize)
-            window.removeEventListener('resize', this.handleResize);
+            removeEventListener('resize', this.update, OPTIONS);
     }
 }

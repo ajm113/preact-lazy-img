@@ -1,6 +1,5 @@
 import {h, Component} from 'preact';
 import LazyWrapper from './LazyWrapper';
-import { debounce } from '../utils/debounce';
 
 const PLACEHOLDER_DIV_CLASSNAME = 'lazyload-placeholder';
 
@@ -14,26 +13,20 @@ export default class LazyImg extends Component {
         this.el = null;
     }
 
-    onWindowScaleEvent = (e) => {
-        debounce(() => {
-            this.setState({
-               visible: this.isInViewport()
-            });
-        }, 50)();
+    onScrollOrResize = e => {
+        this.setState({
+           visible: this.isInViewport()
+        });
     }
 
-    // If the component is invisable no need to update it.
-    shouldComponentUpdate = () => this.state.visible;
-
     render({...props}, {visible}) {
-
         const placeholder = props.placeholder ?
             props.placeholder :
-            <div style={{ height: props.height }} className={PLACEHOLDER_DIV_CLASSNAME} />;
+            <div ref={el => this.el = el.base} style={{ height: props.height }} className={PLACEHOLDER_DIV_CLASSNAME} />;
 
         return (
-            <LazyWrapper onWindowScroll={this.onWindowScaleEvent} onWindowResize={this.onWindowScaleEvent} >
-                <img {...props} ref={el => this.el = el} />
+            <LazyWrapper onWindowScroll={this.onScrollOrResize} onWindowResize={this.onScrollOrResize} >
+                { visible ? <img {...props} ref={el => this.el = el.base} /> : placeholder}
             </LazyWrapper>
         );
     }
@@ -45,9 +38,8 @@ export default class LazyImg extends Component {
     }
 
     isInViewport() {
-        if (!this.el) {
+        if (!this.el)
             return false;
-        }
 
         const top = this.el.getBoundingClientRect().top;
         return ((top + this.props.cushion) >= 0 && (top - this.props.cushion) <= window.innerHeight);

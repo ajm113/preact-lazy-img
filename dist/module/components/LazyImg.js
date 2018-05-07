@@ -14,8 +14,6 @@ var _LazyWrapper = require('./LazyWrapper');
 
 var _LazyWrapper2 = _interopRequireDefault(_LazyWrapper);
 
-var _debounce = require('../utils/debounce');
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -36,16 +34,10 @@ var LazyImg = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (LazyImg.__proto__ || Object.getPrototypeOf(LazyImg)).call(this, props));
 
-        _this.onWindowScaleEvent = function (e) {
-            (0, _debounce.debounce)(function () {
-                _this.setState({
-                    visible: _this.isInViewport()
-                });
-            }, 50)();
-        };
-
-        _this.shouldComponentUpdate = function () {
-            return _this.state.visible;
+        _this.onScrollOrResize = function (e) {
+            console.log(_this.setState({
+                visible: _this.isInViewport()
+            }));
         };
 
         _this.state = {
@@ -56,9 +48,6 @@ var LazyImg = function (_Component) {
         return _this;
     }
 
-    // If the component is invisable no need to update it.
-
-
     _createClass(LazyImg, [{
         key: 'render',
         value: function render(_ref, _ref2) {
@@ -68,14 +57,16 @@ var LazyImg = function (_Component) {
 
             var props = _objectWithoutProperties(_ref, []);
 
-            var placeholder = props.placeholder ? props.placeholder : (0, _preact.h)('div', { style: { height: props.height }, className: PLACEHOLDER_DIV_CLASSNAME });
+            var placeholder = props.placeholder ? props.placeholder : (0, _preact.h)('div', { ref: function ref(el) {
+                    return _this2.el = el.base;
+                }, style: { height: props.height }, className: PLACEHOLDER_DIV_CLASSNAME });
 
             return (0, _preact.h)(
                 _LazyWrapper2.default,
-                { onWindowScroll: this.onWindowScaleEvent, onWindowResize: this.onWindowScaleEvent },
-                (0, _preact.h)('img', _extends({}, props, { ref: function ref(el) {
-                        return _this2.el = el;
-                    } }))
+                { onWindowScroll: this.onScrollOrResize, onWindowResize: this.onScrollOrResize },
+                visible ? (0, _preact.h)('img', _extends({}, props, { ref: function ref(el) {
+                        return _this2.el = el.base;
+                    } })) : placeholder
             );
         }
     }, {
