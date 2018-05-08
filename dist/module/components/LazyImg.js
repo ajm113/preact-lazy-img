@@ -58,15 +58,15 @@ var LazyImg = function (_Component) {
             var props = _objectWithoutProperties(_ref, []);
 
             var placeholder = props.placeholder ? props.placeholder : (0, _preact.h)('div', { ref: function ref(el) {
-                    return _this2.el = el.base;
+                    return _this2.el = el;
                 }, style: { height: props.height }, className: PLACEHOLDER_DIV_CLASSNAME });
 
             return (0, _preact.h)(
                 _LazyWrapper2.default,
                 { onWindowScroll: this.onScrollOrResize, onWindowResize: this.onScrollOrResize },
                 visible ? (0, _preact.h)('img', _extends({}, props, { ref: function ref(el) {
-                        return _this2.el = el.base;
-                    } })) : placeholder
+                        return _this2.el = el;
+                    } })) : placeholder === 'function' ? placeholder() : placeholder
             );
         }
     }, {
@@ -82,7 +82,8 @@ var LazyImg = function (_Component) {
             if (!this.el) return false;
 
             var top = this.el.getBoundingClientRect().top;
-            return top + this.props.cushion >= 0 && top - this.props.cushion <= window.innerHeight;
+            var bottom = this.el.getBoundingClientRect().bottom;
+            return bottom + this.props.cushion >= 0 && top - this.props.cushion <= window.innerHeight;
         }
     }]);
 

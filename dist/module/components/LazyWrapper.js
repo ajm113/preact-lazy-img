@@ -34,13 +34,10 @@ var LazyWrapper = function (_Component) {
             args[_key] = arguments[_key];
         }
 
-        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = LazyWrapper.__proto__ || Object.getPrototypeOf(LazyWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.update = function (e) {
-            switch (e.type) {
-                case 'scroll':
-                    if (_this.props.onWindowScroll) return (0, _debounce.debounce)(_this.props.onWindowScroll, 50)(e);
-                case 'resize':
-                    if (_this.props.onWindowResize) return (0, _debounce.debounce)(_this.props.onWindowResize, 50)(e);
-            }
+        return _ret = (_temp = (_this = _possibleConstructorReturn(this, (_ref = LazyWrapper.__proto__ || Object.getPrototypeOf(LazyWrapper)).call.apply(_ref, [this].concat(args))), _this), _this.windowResizeEvent = function (e) {
+            if (_this.props.onWindowResize) return (0, _debounce.debounce)(_this.props.onWindowResize, 100)(e);
+        }, _this.windowScrollEvent = function (e) {
+            if (_this.props.onWindowScroll) return (0, _debounce.debounce)(_this.props.onWindowScroll, 100)(e);
         }, _temp), _possibleConstructorReturn(_this, _ret);
     }
 
@@ -55,14 +52,14 @@ var LazyWrapper = function (_Component) {
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            if (this.props.onWindowScroll) addEventListener('scroll', this.update, OPTIONS);
-            if (this.props.onWindowResize) addEventListener('resize', this.update, OPTIONS);
+            if (this.props.onWindowScroll) addEventListener('scroll', this.windowScrollEvent, OPTIONS);
+            if (this.props.onWindowResize) addEventListener('resize', this.windowResizeEvent, OPTIONS);
         }
     }, {
         key: 'componentWillUnmount',
         value: function componentWillUnmount() {
-            if (this.props.onWindowScroll) removeEventListener('scroll', this.update, OPTIONS);
-            if (this.props.onWindowResize) removeEventListener('resize', this.update, OPTIONS);
+            if (this.props.onWindowScroll) removeEventListener('scroll', this.windowScrollEvent, OPTIONS);
+            if (this.props.onWindowResize) removeEventListener('resize', this.windowResizeEvent, OPTIONS);
         }
     }]);
 
