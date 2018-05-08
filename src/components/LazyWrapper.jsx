@@ -5,15 +5,14 @@ const OPTIONS = {passive: true};
 
 export default class LazyWrapper extends Component {
 
-    update = e => {
-        switch(e.type) {
-            case 'scroll':
-                if(this.props.onWindowScroll)
-                   return debounce(this.props.onWindowScroll, 50)(e);
-            case 'resize':
-                if(this.props.onWindowResize)
-                   return debounce(this.props.onWindowResize, 50)(e);
-        }
+    windowResizeEvent = e => {
+        if(this.props.onWindowResize)
+           return debounce(this.props.onWindowResize, 100)(e);
+    }
+
+    windowScrollEvent = e => {
+        if(this.props.onWindowScroll)
+           return debounce(this.props.onWindowScroll, 100)(e);
     }
 
     render({children: [child]}) {
@@ -22,15 +21,15 @@ export default class LazyWrapper extends Component {
 
     componentDidMount() {
         if(this.props.onWindowScroll)
-            addEventListener('scroll', this.update, OPTIONS);
+            addEventListener('scroll', this.windowScrollEvent, OPTIONS);
         if(this.props.onWindowResize)
-            addEventListener('resize', this.update, OPTIONS);
+            addEventListener('resize', this.windowResizeEvent, OPTIONS);
     }
 
     componentWillUnmount() {
         if(this.props.onWindowScroll)
-            removeEventListener('scroll', this.update, OPTIONS);
+            removeEventListener('scroll', this.windowScrollEvent, OPTIONS);
         if(this.props.onWindowResize)
-            removeEventListener('resize', this.update, OPTIONS);
+            removeEventListener('resize', this.windowResizeEvent, OPTIONS);
     }
 }
