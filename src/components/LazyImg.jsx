@@ -22,11 +22,13 @@ export default class LazyImg extends Component {
     render({...props}, {visible}) {
         const placeholder = props.placeholder ?
             props.placeholder :
-            <div ref={el => this.el = el.base} style={{ height: props.height }} className={PLACEHOLDER_DIV_CLASSNAME} />;
+            <div ref={el => this.el = el} style={{ height: props.height }} className={PLACEHOLDER_DIV_CLASSNAME} />;
 
         return (
             <LazyWrapper onWindowScroll={this.onScrollOrResize} onWindowResize={this.onScrollOrResize} >
-                { visible ? <img {...props} ref={el => this.el = el.base} /> : placeholder}
+                { visible ?
+                    <img {...props} ref={el => this.el = el} /> :
+                        (placeholder==='function') ? placeholder() : placeholder}
             </LazyWrapper>
         );
     }
@@ -42,7 +44,8 @@ export default class LazyImg extends Component {
             return false;
 
         const top = this.el.getBoundingClientRect().top;
-        return ((top + this.props.cushion) >= 0 && (top - this.props.cushion) <= window.innerHeight);
+        const bottom = this.el.getBoundingClientRect().bottom;
+        return ((bottom + this.props.cushion) >= 0 && (top - this.props.cushion) <= window.innerHeight);
     }
 
     static defaultProps = {

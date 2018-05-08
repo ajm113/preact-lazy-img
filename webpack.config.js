@@ -29,6 +29,9 @@ module.exports = {
             }
         ]
     },
+    externals: {
+        preact: 'preact'
+    },
     plugins: [
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
