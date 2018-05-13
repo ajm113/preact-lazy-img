@@ -1,57 +1,55 @@
 import {h, Component} from 'preact';
-import LazyWrapper from './LazyWrapper';
+import { debounce, isInViewport } from './utils';
 
-const PLACEHOLDER_DIV_CLASSNAME = 'lazyload-placeholder';
+const PLACEHOLDER_DIV_CLASSNAME = '';
 
 export default class LazyImg extends Component {
+
+    static displayName = 'LazyImg';
+
+    state = {
+        visible: false
+    };
+
     constructor(props) {
         super(props);
-        this.state = {
-            visible: false
-        };
 
         this.el = null;
     }
 
-    onScrollOrResize = e => {
+    checkIfImgIsInView() {
+        if(!this.el) return;
+
         this.setState({
-           visible: this.isInViewport()
+            visible: isInViewport(this.el, this.props.cushion)
         });
     }
 
-    render({...props}, {visible}) {
-        const placeholder = props.placeholder ?
-            props.placeholder :
-            <div ref={el => this.el = el} style={{ height: props.height }} className={PLACEHOLDER_DIV_CLASSNAME} />;
+    shouldComponentUpdate ({}, {visible}) {
+        return (visible !== this.state.visible);
+    }
 
-        return (
-            <LazyWrapper onWindowScroll={this.onScrollOrResize} onWindowResize={this.onScrollOrResize} >
-                { visible ?
-                    <img {...props} ref={el => this.el = el} /> :
-                        (placeholder==='function') ? placeholder() : placeholder}
-            </LazyWrapper>
-        );
+    render(props) {
+        const mergedClassName = 'lazyload-placeholder ' + props.className;
+
+        const placeholder = (props.placeholder) ?
+            props.placeholder :
+            (<div {...props} style={{ height: props.height }} className={mergedClassName} ref={(el) => this.el = el} />);
+
+        return this.state.visible ?
+            <img {...props} ref={(el) => this.el = el} /> :
+            placeholder;
     }
 
     componentDidMount() {
-        this.setState({
-           visible: this.isInViewport()
-        });
-    }
-
-    isInViewport() {
-        if (!this.el)
-            return false;
-
-        const top = this.el.getBoundingClientRect().top;
-        const bottom = this.el.getBoundingClientRect().bottom;
-        return ((bottom + this.props.cushion) >= 0 && (top - this.props.cushion) <= window.innerHeight);
+        this.checkIfImgIsInView();
     }
 
     static defaultProps = {
+        className: '',
+        el: null,
         cushion: 0,
-        placeholder: '',
-        unmountIfInvisible: true,
-        placeholderIfInvisible: true
+        placeholderIfInvisible: true,
+        placeholder: null
     }
 }

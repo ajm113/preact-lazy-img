@@ -10,13 +10,9 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _preact = require('preact');
 
-var _LazyWrapper = require('./LazyWrapper');
+var _utils = require('./utils');
 
-var _LazyWrapper2 = _interopRequireDefault(_LazyWrapper);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -24,7 +20,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var PLACEHOLDER_DIV_CLASSNAME = 'lazyload-placeholder';
+var PLACEHOLDER_DIV_CLASSNAME = '';
 
 var LazyImg = function (_Component) {
     _inherits(LazyImg, _Component);
@@ -34,66 +30,65 @@ var LazyImg = function (_Component) {
 
         var _this = _possibleConstructorReturn(this, (LazyImg.__proto__ || Object.getPrototypeOf(LazyImg)).call(this, props));
 
-        _this.onScrollOrResize = function (e) {
-            _this.setState({
-                visible: _this.isInViewport()
-            });
-        };
-
         _this.state = {
             visible: false
         };
+
 
         _this.el = null;
         return _this;
     }
 
     _createClass(LazyImg, [{
-        key: 'render',
-        value: function render(_ref, _ref2) {
-            var _this2 = this;
+        key: 'checkIfImgIsInView',
+        value: function checkIfImgIsInView() {
+            if (!this.el) return;
+            //if(this.state.visible && !placeholderIfInvisible) return;
 
+            this.setState({
+                visible: (0, _utils.isInViewport)(this.el, this.props.cushion)
+            });
+        }
+    }, {
+        key: 'shouldComponentUpdate',
+        value: function shouldComponentUpdate(_ref, _ref2) {
             var visible = _ref2.visible;
 
-            var props = _objectWithoutProperties(_ref, []);
+            _objectDestructuringEmpty(_ref);
 
-            var placeholder = props.placeholder ? props.placeholder : (0, _preact.h)('div', { ref: function ref(el) {
+            return visible !== this.state.visible;
+        }
+    }, {
+        key: 'render',
+        value: function render(props) {
+            var _this2 = this;
+
+            var mergedClassName = 'lazyload-placeholder ' + props.className;
+
+            var placeholder = props.placeholder ? props.placeholder : (0, _preact.h)('div', _extends({}, props, { style: { height: props.height }, className: mergedClassName, ref: function ref(el) {
                     return _this2.el = el;
-                }, style: { height: props.height }, className: PLACEHOLDER_DIV_CLASSNAME });
+                } }));
 
-            return (0, _preact.h)(
-                _LazyWrapper2.default,
-                { onWindowScroll: this.onScrollOrResize, onWindowResize: this.onScrollOrResize },
-                visible ? (0, _preact.h)('img', _extends({}, props, { ref: function ref(el) {
-                        return _this2.el = el;
-                    } })) : placeholder === 'function' ? placeholder() : placeholder
-            );
+            return this.state.visible ? (0, _preact.h)('img', _extends({}, props, { ref: function ref(el) {
+                    return _this2.el = el;
+                } })) : placeholder;
         }
     }, {
         key: 'componentDidMount',
         value: function componentDidMount() {
-            this.setState({
-                visible: this.isInViewport()
-            });
-        }
-    }, {
-        key: 'isInViewport',
-        value: function isInViewport() {
-            if (!this.el) return false;
-
-            var top = this.el.getBoundingClientRect().top;
-            var bottom = this.el.getBoundingClientRect().bottom;
-            return bottom + this.props.cushion >= 0 && top - this.props.cushion <= window.innerHeight;
+            this.checkIfImgIsInView();
         }
     }]);
 
     return LazyImg;
 }(_preact.Component);
 
+LazyImg.displayName = 'LazyImg';
 LazyImg.defaultProps = {
+    className: '',
+    el: null,
     cushion: 0,
-    placeholder: '',
-    unmountIfInvisible: true,
-    placeholderIfInvisible: true
+    placeholderIfInvisible: true,
+    placeholder: null
 };
 exports.default = LazyImg;

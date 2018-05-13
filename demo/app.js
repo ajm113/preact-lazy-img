@@ -1,6 +1,6 @@
 (function() {
     const {Component, h, render} = window.preact;
-    const {LazyImg} = window.preactLazyImg;
+    const {LazyImg, LazyImgWrapper} = window.preactLazyImg;
 
     const Placeholder = (props) => {
         return h('img', props);
@@ -11,20 +11,22 @@
             const getCacheBust = () => '&cacheBust=' + Math.random();
             return (
                 h('div', {id: 'lazyApp'},
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
-                    h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300})
+                    h(LazyImgWrapper, null,
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300}),
+                        h(LazyImg, {src: 'https://picsum.photos/300?random' + getCacheBust(), height: 300})
+                    )
                 )
             );
         }

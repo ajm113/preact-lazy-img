@@ -19,3 +19,14 @@ export function debounce(func, wait, immediate=false) {
             func.apply(context, args);
     };
 }
+
+export function isInViewport(el, cushion) {
+    if (!el)
+        return false;
+
+    const top = el.getBoundingClientRect().top;
+    const bottom = el.getBoundingClientRect().bottom;
+    return ((bottom + cushion) >= 0 && (top - cushion) <= window.innerHeight);
+}
+
+export const noop = () => {};

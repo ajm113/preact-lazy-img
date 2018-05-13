@@ -1,2 +1,2 @@
-export LazyImgWrapper from './components/LazyWrapper';
+export LazyImgWrapper from './components/LazyImgWrapper';
 export LazyImg from './components/LazyImg';

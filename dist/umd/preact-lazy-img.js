@@ -1,42 +1,42 @@
-!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t(require("preact")):"function"==typeof define&&define.amd?define(["preact"],t):"object"==typeof exports?exports.preactLazyImg=t(require("preact")):e.preactLazyImg=t(e.preact)}(this,function(e){return function(e){function t(o){if(n[o])return n[o].exports
-var r=n[o]={i:o,l:!1,exports:{}}
-return e[o].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={}
-return t.m=e,t.c=n,t.d=function(e,n,o){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:o})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e}
-return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/build/",t(t.s=2)}([function(e,t,n){"use strict"
-function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function r(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
+!function(e,t){"object"==typeof exports&&"object"==typeof module?module.exports=t(require("preact")):"function"==typeof define&&define.amd?define(["preact"],t):"object"==typeof exports?exports.preactLazyImg=t(require("preact")):e.preactLazyImg=t(e.preact)}(this,function(e){return function(e){function t(r){if(n[r])return n[r].exports
+var o=n[r]={i:r,l:!1,exports:{}}
+return e[r].call(o.exports,o,o.exports,t),o.l=!0,o.exports}var n={}
+return t.m=e,t.c=n,t.d=function(e,n,r){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:r})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e}
+return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="/build/",t(t.s=3)}([function(t,n){t.exports=e},function(e,t,n){"use strict"
+function r(e,t){var n=this,r=arguments,o=arguments.length>2&&void 0!==arguments[2]&&arguments[2],i=0
+return function(){var u=n,a=r,l=function(){i=0,o||e.apply(u,a)},c=o&&!i
+clearTimeout(i),i=setTimeout(l,t),c&&e.apply(u,a)}}function o(e,t){if(!e)return!1
+var n=e.getBoundingClientRect().top
+return e.getBoundingClientRect().bottom+t>=0&&n-t<=window.innerHeight}Object.defineProperty(t,"__esModule",{value:!0}),t.debounce=r,t.isInViewport=o
+t.noop=function(){}},function(e,t,n){"use strict"
+function r(e){if(null==e)throw new TypeError("Cannot destructure undefined")}function o(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function i(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
+return!t||"object"!==(void 0===t?"undefined":a(t))&&"function"!=typeof t?e:t}function u(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+(void 0===t?"undefined":a(t)))
+e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var a="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e}
+Object.defineProperty(t,"__esModule",{value:!0})
+var l=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
+for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},c=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n]
+r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),s=n(0),f=n(1),p=function(e){function t(e){o(this,t)
+var n=i(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))
+return n.state={visible:!1},n.el=null,n}return u(t,e),c(t,[{key:"checkIfImgIsInView",value:function(){this.el&&this.setState({visible:(0,f.isInViewport)(this.el,this.props.cushion)})}},{key:"shouldComponentUpdate",value:function(e,t){var n=t.visible
+return r(e),n!==this.state.visible}},{key:"render",value:function(e){var t=this,n="lazyload-placeholder "+e.className,r=e.placeholder?e.placeholder:(0,s.h)("div",l({},e,{style:{height:e.height},className:n,ref:function(e){return t.el=e}}))
+return this.state.visible?(0,s.h)("img",l({},e,{ref:function(e){return t.el=e}})):r}},{key:"componentDidMount",value:function(){this.checkIfImgIsInView()}}]),t}(s.Component)
+p.displayName="LazyImg",p.defaultProps={className:"",el:null,cushion:0,placeholderIfInvisible:!0,placeholder:null},t.default=p},function(e,t,n){"use strict"
+function r(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.LazyImg=t.LazyImgWrapper=void 0
+var o=n(4),i=r(o),u=n(2),a=r(u)
+t.LazyImgWrapper=i.default,t.LazyImg=a.default},function(e,t,n){"use strict"
+function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function o(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
 return!t||"object"!==(void 0===t?"undefined":u(t))&&"function"!=typeof t?e:t}function i(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+(void 0===t?"undefined":u(t)))
 e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var u="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e}
 Object.defineProperty(t,"__esModule",{value:!0})
-var c=function(){function e(e,t){var n=[],o=!0,r=!1,i=void 0
-try{for(var u,c=e[Symbol.iterator]();!(o=(u=c.next()).done)&&(n.push(u.value),!t||n.length!==t);o=!0);}catch(e){r=!0,i=e}finally{try{!o&&c.return&&c.return()}finally{if(r)throw i}}return n}return function(t,n){if(Array.isArray(t))return t
-if(Symbol.iterator in Object(t))return e(t,n)
-throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),l=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n]
-o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),f=n(1),a=n(3),s={passive:!0},p=function(e){function t(){var e,n,i,u
-o(this,t)
-for(var c=arguments.length,l=Array(c),f=0;f<c;f++)l[f]=arguments[f]
-return n=i=r(this,(e=t.__proto__||Object.getPrototypeOf(t)).call.apply(e,[this].concat(l))),i.windowResizeEvent=function(e){if(i.props.onWindowResize)return(0,a.debounce)(i.props.onWindowResize,100)(e)},i.windowScrollEvent=function(e){if(i.props.onWindowScroll)return(0,a.debounce)(i.props.onWindowScroll,100)(e)},u=n,r(i,u)}return i(t,e),l(t,[{key:"render",value:function(e){var t=c(e.children,1),n=t[0]
-return"function"==typeof n?n():n}},{key:"componentDidMount",value:function(){this.props.onWindowScroll&&addEventListener("scroll",this.windowScrollEvent,s),this.props.onWindowResize&&addEventListener("resize",this.windowResizeEvent,s)}},{key:"componentWillUnmount",value:function(){this.props.onWindowScroll&&removeEventListener("scroll",this.windowScrollEvent,s),this.props.onWindowResize&&removeEventListener("resize",this.windowResizeEvent,s)}}]),t}(f.Component)
-t.default=p},function(t,n){t.exports=e},function(e,t,n){"use strict"
-function o(e){return e&&e.__esModule?e:{default:e}}Object.defineProperty(t,"__esModule",{value:!0}),t.LazyImg=t.LazyImgWrapper=void 0
-var r=n(0),i=o(r),u=n(4),c=o(u)
-t.LazyImgWrapper=i.default,t.LazyImg=c.default},function(e,t,n){"use strict"
-function o(e,t){var n=this,o=arguments,r=arguments.length>2&&void 0!==arguments[2]&&arguments[2],i=0
-return function(){var u=n,c=o,l=function(){i=0,r||e.apply(u,c)},f=r&&!i
-clearTimeout(i),i=setTimeout(l,t),f&&e.apply(u,c)}}Object.defineProperty(t,"__esModule",{value:!0}),t.debounce=o},function(e,t,n){"use strict"
-function o(e,t){var n={}
-for(var o in e)t.indexOf(o)>=0||Object.prototype.hasOwnProperty.call(e,o)&&(n[o]=e[o])
-return n}function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function i(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called")
-return!t||"object"!==(void 0===t?"undefined":c(t))&&"function"!=typeof t?e:t}function u(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+(void 0===t?"undefined":c(t)))
-e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var c="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e}
-Object.defineProperty(t,"__esModule",{value:!0})
-var l=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
-for(var o in n)Object.prototype.hasOwnProperty.call(n,o)&&(e[o]=n[o])}return e},f=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n]
-o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),a=n(1),s=n(0),p=function(e){return e&&e.__esModule?e:{default:e}}(s),d=function(e){function t(e){r(this,t)
-var n=i(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))
-return n.onScrollOrResize=function(e){n.setState({visible:n.isInViewport()})},n.state={visible:!1},n.el=null,n}return u(t,e),f(t,[{key:"render",value:function(e,t){var n=this,r=t.visible,i=o(e,[]),u=i.placeholder?i.placeholder:(0,a.h)("div",{ref:function(e){return n.el=e},style:{height:i.height},className:"lazyload-placeholder"})
-return(0,a.h)(p.default,{onWindowScroll:this.onScrollOrResize,onWindowResize:this.onScrollOrResize},r?(0,a.h)("img",l({},i,{ref:function(e){return n.el=e}})):"function"===u?u():u)}},{key:"componentDidMount",value:function(){this.setState({visible:this.isInViewport()})}},{key:"isInViewport",value:function(){if(!this.el)return!1
-var e=this.el.getBoundingClientRect().top
-return this.el.getBoundingClientRect().bottom+this.props.cushion>=0&&e-this.props.cushion<=window.innerHeight}}]),t}(a.Component)
-d.defaultProps={cushion:0,placeholder:"",unmountIfInvisible:!0,placeholderIfInvisible:!0},t.default=d}])})
+var a=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n]
+r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),l=n(0),c=n(1),s=n(2),f=function(e){return e&&e.__esModule?e:{default:e}}(s),p=function(e){function t(e){r(this,t)
+var n=o(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))
+return n.windowEvents=["scroll","resize","touchmove"],n.refs={wrapper:null,children:[]},n.windowChangeEvent=function(e){return(0,c.debounce)(function(){var e=(0,c.isInViewport)(n.refs.wrapper,n.props.cushion)
+n.setState({visible:e}),n.state.visible&&n.refs.children&&n.refs.children.map(function(e){e.checkIfImgIsInView()})},100)(e)},n.shouldComponentUpdate=function(){return n.state.visible},n.state={visible:!1},n}return i(t,e),a(t,[{key:"render",value:function(e){var t=this,n=e.className,r=e.placeholderIfInvisible,o=e.cushion,i=e.placeholder,u=e.children,a="lazyload-wrapper "+n
+return(0,l.h)("div",{className:a,ref:function(e){return t.refs.wrapper=e}},u.map(function(e,n){var u=e.nodeName.hasOwnProperty("displayName")&&e.nodeName.displayName==f.default.displayName?{placeholder:i,cushion:o,placeholderIfInvisible:r,ref:function(e){t.refs.children[n]=e}}:{}
+return(0,l.cloneElement)(e,u)}))}},{key:"componentDidMount",value:function(){var e=this
+this.setState({visible:(0,c.isInViewport)(this.wrapperEl,this.props.cushion)}),this.state.visible&&this.refs.children&&this.refs.children.map(function(e){e.checkIfImgIsInView()}),this.windowEvents.map(function(t){return window.addEventListener(t,e.windowChangeEvent,!1)})}},{key:"componentWillUnmount",value:function(){var e=this
+this.windowEvents.map(function(t){return window.removeEventListener(t,e.windowChangeEvent,!1)})}}]),t}(l.Component)
+p.displayName="LazyImgWrapper",p.defaultProps={cushion:0,placeholderIfInvisible:!0,className:"",placeholder:null},t.default=p}])})
 
 //# sourceMappingURL=preact-lazy-img.js.map
