@@ -1,5 +1,7 @@
-# preact-lazy-img (WIP)
+# preact-lazy-img
+![STATUS](https://img.shields.io/badge/Status-WIP-orange.svg) 
 [![Build Status](https://travis-ci.org/ajm113/preact-lazy-img.svg?branch=master)](https://travis-ci.org/ajm113/preact-lazy-img)
+
 
 *Lazy load images when the user scrolls over them.*
 
@@ -33,3 +35,24 @@ import {LazyImg, LazyImgWrapper } from 'preact-lazy-img';
     display: inline-block;
 }
 ```
+
+## Todos:
+
+- [x] Implement Travis CI.
+- [ ] Write more unit tests surrounding LazyImg and LazyImgWrapper.
+- [ ] Create CodePen Demo.
+- [ ] Allow child LazyImg props to be overwrite parent LazyImgWrapper.
+- [ ] Write more documentation around available props.
+- [ ] Upgrade to Webpack 4. **(low)**
+
+## Credits
+- Preact
+- Babel
+- Eslint
+- Jest
+- Enzyme
+- Webpack
+
+## License
+
+[MIT](LICENSE)
