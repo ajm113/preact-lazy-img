@@ -12,6 +12,7 @@ logs
 node_modules
 modules
 docs/html
+coverage
 
 # Users Environment Variables
 .lock-wscript
