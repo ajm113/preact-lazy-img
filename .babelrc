@@ -14,7 +14,7 @@
         "build" : {
             "presets": ["es2015", "stage-0", "react"],
             "ignore": [
-                "**/_tests_/*.js"
+                "**/test/*.js"
             ],
             "plugins": [
                 [
