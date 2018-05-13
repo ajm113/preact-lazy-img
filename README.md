@@ -1,6 +1,7 @@
 # preact-lazy-img (WIP)
+[![Build Status](https://travis-ci.org/ajm113/preact-lazy-img.svg?branch=master)](https://travis-ci.org/ajm113/preact-lazy-img)
 
-Lazy load images when the user scrolls to them.
+*Lazy load images when the user scrolls over them.*
 
 **NOTE: DO NOT USE IN PRODUCTION! STILL WORK IN PROGRESS!!!!**
 
