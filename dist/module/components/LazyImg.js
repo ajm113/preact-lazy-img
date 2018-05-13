@@ -43,7 +43,6 @@ var LazyImg = function (_Component) {
         key: 'checkIfImgIsInView',
         value: function checkIfImgIsInView() {
             if (!this.el) return;
-            //if(this.state.visible && !placeholderIfInvisible) return;
 
             this.setState({
                 visible: (0, _utils.isInViewport)(this.el, this.props.cushion)
