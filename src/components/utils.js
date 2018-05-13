@@ -6,7 +6,7 @@ export function debounce(func, wait, immediate=false) {
         let later = () => {
             timeout = 0;
 
-            if(!immediate)
+            if (!immediate)
                 func.apply(context, args);
         };
 
@@ -15,7 +15,7 @@ export function debounce(func, wait, immediate=false) {
         clearTimeout(timeout);
         timeout = setTimeout(later, wait);
 
-        if(callNow)
+        if (callNow)
             func.apply(context, args);
     };
 }

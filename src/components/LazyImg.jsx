@@ -1,7 +1,5 @@
 import {h, Component} from 'preact';
-import { debounce, isInViewport } from './utils';
-
-const PLACEHOLDER_DIV_CLASSNAME = '';
+import { isInViewport } from './utils';
 
 export default class LazyImg extends Component {
 
@@ -18,7 +16,7 @@ export default class LazyImg extends Component {
     }
 
     checkIfImgIsInView() {
-        if(!this.el) return;
+        if (!this.el) return;
 
         this.setState({
             visible: isInViewport(this.el, this.props.cushion)

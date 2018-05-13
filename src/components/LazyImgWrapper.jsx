@@ -12,7 +12,7 @@ export default class LazyImgWrapper extends Component {
 
     static displayName = 'LazyImgWrapper';
 
-    refs = {
+    ref = {
         wrapper: null,
         children: []
     };
@@ -27,14 +27,12 @@ export default class LazyImgWrapper extends Component {
 
     windowChangeEvent = e => {
         return debounce(() => {
-            const visible = isInViewport(this.refs.wrapper, this.props.cushion);
+            const visible = isInViewport(this.ref.wrapper, this.props.cushion);
 
-            this.setState({
-                visible: visible
-            });
+            this.setState({ visible });
 
-            if(this.state.visible && this.refs.children)
-                this.refs.children.map(c => {
+            if (this.state.visible && this.ref.children)
+                this.ref.children.map(c => {
                     c.checkIfImgIsInView();
                 });
 
@@ -49,17 +47,17 @@ export default class LazyImgWrapper extends Component {
         const mergedClassName = WRAPPER_DIV_CLASSNAME + ' ' + className;
 
         return (
-            <div className={mergedClassName} ref={(el) => this.refs.wrapper = el}>
+            <div className={mergedClassName} ref={(el) => this.ref.wrapper = el}>
                 {(children.map((child, index) => {
                     const mergedProps = (child.nodeName.hasOwnProperty('displayName')
-                        && child.nodeName.displayName  == LazyImg.displayName) ?
-                            {
-                                placeholder: placeholder,
-                                cushion: cushion,
-                                placeholderIfInvisible: placeholderIfInvisible,
-                                ref: (el) => { this.refs.children[index] = el;  }
-                            }
-                            : {};
+                        && child.nodeName.displayName  === LazyImg.displayName) ?
+                        {
+                            placeholder,
+                            cushion,
+                            placeholderIfInvisible,
+                            ref: (el) => { this.ref.children[index] = el;  }
+                        }
+                        : {};
 
                     return cloneElement(child, mergedProps);
                 }))}
@@ -72,16 +70,16 @@ export default class LazyImgWrapper extends Component {
             visible: isInViewport(this.wrapperEl, this.props.cushion)
         });
 
-        if(this.state.visible && this.refs.children)
-            this.refs.children.map(c => {
+        if (this.state.visible && this.ref.children)
+            this.ref.children.map(c => {
                 c.checkIfImgIsInView();
             });
 
-        this.windowEvents.map(e => window.addEventListener(e, this.windowChangeEvent, EVENT_LISTEN_OPTIONS))
+        this.windowEvents.map(e => window.addEventListener(e, this.windowChangeEvent, EVENT_LISTEN_OPTIONS));
     }
 
     componentWillUnmount() {
-        this.windowEvents.map(e => window.removeEventListener(e, this.windowChangeEvent, EVENT_LISTEN_OPTIONS))
+        this.windowEvents.map(e => window.removeEventListener(e, this.windowChangeEvent, EVENT_LISTEN_OPTIONS));
     }
 
     static defaultProps = {

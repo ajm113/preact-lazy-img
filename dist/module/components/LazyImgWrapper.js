@@ -35,20 +35,18 @@ var LazyImgWrapper = function (_Component) {
         var _this = _possibleConstructorReturn(this, (LazyImgWrapper.__proto__ || Object.getPrototypeOf(LazyImgWrapper)).call(this, props));
 
         _this.windowEvents = ['scroll', 'resize', 'touchmove'];
-        _this.refs = {
+        _this.ref = {
             wrapper: null,
             children: []
         };
 
         _this.windowChangeEvent = function (e) {
             return (0, _utils.debounce)(function () {
-                var visible = (0, _utils.isInViewport)(_this.refs.wrapper, _this.props.cushion);
+                var visible = (0, _utils.isInViewport)(_this.ref.wrapper, _this.props.cushion);
 
-                _this.setState({
-                    visible: visible
-                });
+                _this.setState({ visible: visible });
 
-                if (_this.state.visible && _this.refs.children) _this.refs.children.map(function (c) {
+                if (_this.state.visible && _this.ref.children) _this.ref.children.map(function (c) {
                     c.checkIfImgIsInView();
                 });
             }, 100)(e);
@@ -81,15 +79,15 @@ var LazyImgWrapper = function (_Component) {
             return (0, _preact.h)(
                 'div',
                 { className: mergedClassName, ref: function ref(el) {
-                        return _this2.refs.wrapper = el;
+                        return _this2.ref.wrapper = el;
                     } },
                 children.map(function (child, index) {
-                    var mergedProps = child.nodeName.hasOwnProperty('displayName') && child.nodeName.displayName == _LazyImg2.default.displayName ? {
+                    var mergedProps = child.nodeName.hasOwnProperty('displayName') && child.nodeName.displayName === _LazyImg2.default.displayName ? {
                         placeholder: placeholder,
                         cushion: cushion,
                         placeholderIfInvisible: placeholderIfInvisible,
                         ref: function ref(el) {
-                            _this2.refs.children[index] = el;
+                            _this2.ref.children[index] = el;
                         }
                     } : {};
 
@@ -106,7 +104,7 @@ var LazyImgWrapper = function (_Component) {
                 visible: (0, _utils.isInViewport)(this.wrapperEl, this.props.cushion)
             });
 
-            if (this.state.visible && this.refs.children) this.refs.children.map(function (c) {
+            if (this.state.visible && this.ref.children) this.ref.children.map(function (c) {
                 c.checkIfImgIsInView();
             });
 
