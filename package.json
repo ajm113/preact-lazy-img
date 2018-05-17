@@ -1,7 +1,7 @@
 {
   "name": "preact-lazy-img",
   "amdName": "preactLazyImg",
-  "version": "0.3.6",
+  "version": "0.3.8",
   "description": "Lazy load/unload image(s) using Preact!",
   "main": "dist/module/index.js",
   "minified:main": "dist/module/umd/preact-lazy-img.js",
