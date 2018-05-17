@@ -33,12 +33,25 @@ module.exports = {
         preact: 'preact'
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
         new webpack.optimize.OccurrenceOrderPlugin(),
         new webpack.optimize.UglifyJsPlugin({
             beautify: false,
+            unused: true,
+            dead_code: true,
+            warnings: false,
+            drop_console: true,
             comments: /^$/,
             compress: {
-                warnings: false
+                warnings: false,
+                pure_getters: true,
+                unsafe: true,
+                unsafe_comps: true,
+                screw_ie8: true
             },
             mangle: true,
             output: {

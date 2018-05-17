@@ -13,8 +13,8 @@ function r(e){if(null==e)throw new TypeError("Cannot destructure undefined")}fun
 return!t||"object"!==(void 0===t?"undefined":l(t))&&"function"!=typeof t?e:t}function u(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+(void 0===t?"undefined":l(t)))
 e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var l="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e}
 Object.defineProperty(t,"__esModule",{value:!0})
-var a=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t]
-for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},c=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n]
+var a=Object.assign||function(e){for(var t=1;arguments.length>t;t++){var n=arguments[t]
+for(var r in n)Object.prototype.hasOwnProperty.call(n,r)&&(e[r]=n[r])}return e},c=function(){function e(e,t){for(var n=0;t.length>n;n++){var r=t[n]
 r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),f=n(0),s=n(1),p=function(e){function t(e){o(this,t)
 var n=i(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))
 return n.state={visible:!1},n.el=null,n}return u(t,e),c(t,[{key:"checkIfImgIsInView",value:function(){this.el&&this.setState({visible:(0,s.isInViewport)(this.el,this.props.cushion)})}},{key:"shouldComponentUpdate",value:function(e,t){var n=t.visible
@@ -28,12 +28,12 @@ function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as
 return!t||"object"!==(void 0===t?"undefined":u(t))&&"function"!=typeof t?e:t}function i(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+(void 0===t?"undefined":u(t)))
 e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}var u="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e}
 Object.defineProperty(t,"__esModule",{value:!0})
-var l=function(){function e(e,t){for(var n=0;n<t.length;n++){var r=t[n]
+var l=function(){function e(e,t){for(var n=0;t.length>n;n++){var r=t[n]
 r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}return function(t,n,r){return n&&e(t.prototype,n),r&&e(t,r),t}}(),a=n(0),c=n(1),f=n(2),s=function(e){return e&&e.__esModule?e:{default:e}}(f),p=function(e){function t(e){r(this,t)
 var n=o(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e))
 return n.windowEvents=["scroll","resize","touchmove"],n.ref={wrapper:null,children:[]},n.windowChangeEvent=function(e){return(0,c.debounce)(function(){var e=(0,c.isInViewport)(n.ref.wrapper,n.props.cushion)
-n.setState({visible:e}),n.state.visible&&n.ref.children&&n.ref.children.map(function(e){e.checkIfImgIsInView()})},100)(e)},n.shouldComponentUpdate=function(){return n.state.visible},n.state={visible:!1},n}return i(t,e),l(t,[{key:"render",value:function(e){var t=this,n=e.className,r=e.placeholderIfInvisible,o=e.cushion,i=e.placeholder,u=e.children,l="lazyload-wrapper "+n
-return(0,a.h)("div",{className:l,ref:function(e){return t.ref.wrapper=e}},u.map(function(e,n){var u=e.nodeName.hasOwnProperty("displayName")&&e.nodeName.displayName===s.default.displayName?{placeholder:i,cushion:o,placeholderIfInvisible:r,ref:function(e){t.ref.children[n]=e}}:{}
+n.setState({visible:e}),n.state.visible&&n.ref.children&&n.ref.children.map(function(e){e.checkIfImgIsInView()})},100)(e)},n.shouldComponentUpdate=function(){return n.state.visible},n.state={visible:!1},n}return i(t,e),l(t,[{key:"render",value:function(e){var t=this,n=e.className,r=e.placeholderIfInvisible,o=e.cushion,i=e.placeholder,u=e.children
+return(0,a.h)("div",{className:"lazyload-wrapper "+n,ref:function(e){return t.ref.wrapper=e}},u.map(function(e,n){var u=e.nodeName.hasOwnProperty("displayName")&&e.nodeName.displayName===s.default.displayName?{placeholder:i,cushion:o,placeholderIfInvisible:r,ref:function(e){t.ref.children[n]=e}}:{}
 return(0,a.cloneElement)(e,u)}))}},{key:"componentDidMount",value:function(){var e=this
 this.setState({visible:(0,c.isInViewport)(this.wrapperEl,this.props.cushion)}),this.state.visible&&this.ref.children&&this.ref.children.map(function(e){e.checkIfImgIsInView()}),this.windowEvents.map(function(t){return window.addEventListener(t,e.windowChangeEvent,!1)})}},{key:"componentWillUnmount",value:function(){var e=this
 this.windowEvents.map(function(t){return window.removeEventListener(t,e.windowChangeEvent,!1)})}}]),t}(a.Component)
